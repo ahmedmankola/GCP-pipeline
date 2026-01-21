@@ -1,0 +1,46 @@
+steps:
+  # Step 1: Terraform Init & Plan (Always runs for PRs and Merges)
+  - id: 'tf-plan'
+    name: 'hashicorp/terraform:latest'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        BASE_DIR="environments/dev"
+        for dir in iam networking storage compute database; do
+          if [ -d "$BASE_DIR/$dir" ]; then
+            echo "--- Initializing & Planning: $dir ---"
+            terraform -chdir="$BASE_DIR/$dir" init -input=false
+            terraform -chdir="$BASE_DIR/$dir" plan -input=false -var-file="../../../terraform.tfvars"
+          fi
+        done
+
+  # Step 2: Terraform Apply (Runs ONLY when merged to main)
+  - id: 'tf-apply'
+    name: 'hashicorp/terraform:latest'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        # Condition check: If _PR_NUMBER is NOT empty, we are in a PR. Exit early.
+        if [ ! -z "$_PR_NUMBER" ]; then
+          echo "This is a Pull Request (#$_PR_NUMBER). Skipping Apply."
+          exit 0
+        fi
+
+        # Condition check: Only apply if we are on the main branch
+        if [ "$BRANCH_NAME" != "main" ]; then
+          echo "Current branch is $BRANCH_NAME. Skipping Apply."
+          exit 0
+        fi
+
+        BASE_DIR="environments/dev"
+        for dir in iam networking storage compute database; do
+          if [ -d "$BASE_DIR/$dir" ]; then
+            echo "--- Applying Changes: $dir ---"
+            terraform -chdir="$BASE_DIR/$dir" apply -auto-approve -input=false -var-file="../../../terraform.tfvars"
+          fi
+        done
+
+options:
+  logging: CLOUD_LOGGING_ONLY
