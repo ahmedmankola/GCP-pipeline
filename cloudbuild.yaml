@@ -13,7 +13,7 @@ steps:
           echo "--- Processing: $dir ---"
           echo "--- Initializing & Planning: $dir ---"
           terraform -chdir="$base_dir$dir" init -input=false
-          terraform -chdir="$base_dir$dir" plan -input=false -var-file="../../../terraform.tfvars"
+          terraform -chdir="$base_dir$dir" plan -input=false -var-file="terraform.tfvars"
         done
 
   # Step 2: Terraform Apply (Runs ONLY when merged to main)
@@ -37,10 +37,8 @@ steps:
 
         #base_dir="environments/dev"
         for dir in iam networking storage compute database; do
-          if [ -d "$base_dir$dir" ]; then
-            echo "--- Applying Changes: $dir ---"
-            terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="terraform.tfvars"
-          fi
+          echo "--- Applying Changes: $dir ---"
+          terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="terraform.tfvars"
         done
         
 options:
