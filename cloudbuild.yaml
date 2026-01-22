@@ -7,14 +7,14 @@ steps:
       - '-c'
       - |
         export TF_LOG=INFO
-        base_dir="environments/dev"
+        base_dir="environments/dev/"
        
         for dir in iam networking storage compute database; do
-          if [ -d '$base_dir/$dir' ]; then
+          if [ -d '$base_dir$dir' ]; then
             echo "--- Processing: $dir ---"
             echo "--- Initializing & Planning: $dir ---"
-            terraform -chdir="$base_dir/$dir" init -input=false
-            terraform -chdir="$base_dir/$dir" plan -input=false -var-file="../../../terraform.tfvars"
+            terraform -chdir="$base_dir$dir" init -input=false
+            terraform -chdir="$base_dir$dir" plan -input=false -var-file="../../../terraform.tfvars"
           fi
            echo "$basedir"
           echo '$_BASE_DIR/$dir'
@@ -42,9 +42,9 @@ steps:
 
         _BASE_DIR="environments/dev"
         for dir in iam networking storage compute database; do
-          if [ -d "$base_dir/$dir" ]; then
+          if [ -d "$base_dir$dir" ]; then
             echo "--- Applying Changes: $dir ---"
-            terraform -chdir="$base_dir/$dir" apply -auto-approve -input=false -var-file="../../../terraform.tfvars"
+            terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="terraform.tfvars"
           fi
         done
         
