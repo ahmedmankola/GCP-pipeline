@@ -9,16 +9,16 @@ steps:
         export TF_LOG=INFO
         base_dir="environments/dev/"
        
-        for dir in iam networking storage compute database; do
+        for dir in iam ; do
           echo "--- Processing: $dir ---"
           echo "--- Initializing & Planning: $dir ---"
           terraform -chdir="$base_dir$dir" init -input=false
-          terraform -chdir="$base_dir$dir" plan -input=false -var-file="terraform.tfvars"
+          terraform -chdir="$base_dir$dir" plan -input=false -var-file="../../../terraform.tfvars"
         done
 
   # Step 2: Terraform Apply (Runs ONLY when merged to main)
   - id: 'tf-apply'
-    name: 'hashicorp/terraform:latest'
+ #   name: 'hashicorp/terraform:latest'
     entrypoint: 'sh'
     args:
       - '-c'
@@ -36,9 +36,9 @@ steps:
         fi
 
         #base_dir="environments/dev"
-        for dir in iam networking storage compute database; do
+        for dir in iam ; do
           echo "--- Applying Changes: $dir ---"
-          terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="terraform.tfvars"
+          terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="../../../terraform.tfvars"
         done
         
 options:
