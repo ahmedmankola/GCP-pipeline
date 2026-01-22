@@ -1,6 +1,6 @@
-resource "google_project_iam_custom_role" "vm_operator" {
-  role_id     = "vmPowerOperator"
-  title       = "VM Power Operator"
+resource "google_project_iam_custom_role" "basic_operation_role" {
+  role_id     = "basicoperationrole"
+  title       = "basic operation role"
   description = "Can view the project and start/stop virtual machines"
   
   permissions = [
@@ -14,7 +14,13 @@ resource "google_project_iam_custom_role" "vm_operator" {
     # VM power management permissions
     "compute.instances.start",
     "compute.instances.stop",
-    "compute.instances.reset"
+    "compute.instances.reset",
+
+    #  Network Viewing Permissions
+    "compute.networks.get",
+    "compute.networks.list",
+    "compute.subnetworks.get",
+    "compute.subnetworks.list"
   ]
 }
 
