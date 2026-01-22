@@ -10,15 +10,10 @@ steps:
         base_dir="environments/dev/"
        
         for dir in iam networking storage compute database; do
-          if [ -d '$base_dir$dir' ]; then
-            echo "--- Processing: $dir ---"
-            echo "--- Initializing & Planning: $dir ---"
-            terraform -chdir="$base_dir$dir" init -input=false
-            terraform -chdir="$base_dir$dir" plan -input=false -var-file="../../../terraform.tfvars"
-          fi
-           echo "$basedir"
-          echo "$base_dir$dir"
-          ls -lathr
+          echo "--- Processing: $dir ---"
+          echo "--- Initializing & Planning: $dir ---"
+          terraform -chdir="$base_dir$dir" init -input=false
+          terraform -chdir="$base_dir$dir" plan -input=false -var-file="../../../terraform.tfvars"
         done
 
   # Step 2: Terraform Apply (Runs ONLY when merged to main)
