@@ -6,13 +6,16 @@ steps:
     args:
       - '-c'
       - |
+        export TF_LOG=INFO
         _BASE_DIR="environments/dev"
         for dir in iam networking storage compute database; do
           if [ -d "$_BASE_DIR/$dir" ]; then
+            echo "--- Processing: $dir ---"
             echo "--- Initializing & Planning: $dir ---"
             terraform -chdir="$_BASE_DIR/$dir" init -input=false
             terraform -chdir="$_BASE_DIR/$dir" plan -input=false -var-file="../../../terraform.tfvars"
           fi
+          ls -lathr
         done
 
   # Step 2: Terraform Apply (Runs ONLY when merged to main)
