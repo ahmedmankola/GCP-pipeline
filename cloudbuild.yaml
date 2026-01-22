@@ -17,7 +17,7 @@ steps:
             terraform -chdir="$base_dir$dir" plan -input=false -var-file="../../../terraform.tfvars"
           fi
            echo "$basedir"
-          echo "$BASE_DIR$dir"
+          echo "$base_dir$dir"
           ls -lathr
         done
 
@@ -40,7 +40,7 @@ steps:
           exit 0
         fi
 
-        _BASE_DIR="environments/dev"
+        #base_dir="environments/dev"
         for dir in iam networking storage compute database; do
           if [ -d "$base_dir$dir" ]; then
             echo "--- Applying Changes: $dir ---"
@@ -48,6 +48,5 @@ steps:
           fi
         done
         
-
 options:
   logging: CLOUD_LOGGING_ONLY
