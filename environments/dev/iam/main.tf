@@ -6,7 +6,6 @@ resource "google_project_iam_custom_role" "vm_operator" {
   permissions = [
     # Project viewing permissions
     "resourcemanager.projects.get",
-    "resourcemanager.projects.list",
     
     # VM viewing permissions
     "compute.instances.get",
