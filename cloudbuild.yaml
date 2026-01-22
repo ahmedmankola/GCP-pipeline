@@ -8,6 +8,7 @@ steps:
       - |
         export TF_LOG=INFO
         _BASE_DIR="environments/dev"
+        echo "$_BASE_DIR/$dir"
         for dir in iam networking storage compute database; do
           if [ -d "$_BASE_DIR/$dir" ]; then
             echo "--- Processing: $dir ---"
