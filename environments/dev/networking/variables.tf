@@ -1,5 +1,10 @@
-variable "region" {
-  description = "select which region you will use"
+variable "region1" {
+  description = "first VPC region"
+  type        = string
+}
+
+variable "region2" {
+  description = "second VPC region"
   type        = string
 }
 
