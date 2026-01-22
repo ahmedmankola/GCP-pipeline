@@ -18,7 +18,7 @@ steps:
 
   # Step 2: Terraform Apply (Runs ONLY when merged to main)
   - id: 'tf-apply'
- #   name: 'hashicorp/terraform:latest'
+    name: 'hashicorp/terraform:latest'
     entrypoint: 'sh'
     args:
       - '-c'
