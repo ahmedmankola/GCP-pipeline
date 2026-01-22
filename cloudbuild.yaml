@@ -35,7 +35,7 @@ steps:
           exit 0
         fi
 
-        base_dir="environments/dev"
+        base_dir="environments/dev/"
         for dir in iam ; do
           echo "--- Applying Changes: $dir ---"
           terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="../../../terraform.tfvars"
