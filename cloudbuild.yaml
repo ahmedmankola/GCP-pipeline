@@ -17,7 +17,7 @@ steps:
             terraform -chdir="$base_dir$dir" plan -input=false -var-file="../../../terraform.tfvars"
           fi
            echo "$basedir"
-          echo '$_BASE_DIR/$dir'
+          echo "$BASE_DIR$dir"
           ls -lathr
         done
 
