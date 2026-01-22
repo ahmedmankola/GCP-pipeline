@@ -10,7 +10,7 @@ steps:
         _BASE_DIR="environments/dev"
        
         for dir in iam networking storage compute database; do
-          if [ -d "$_BASE_DIR/$dir" ]; then
+          if [ -d '$_BASE_DIR/$dir' ]; then
             echo "--- Processing: $dir ---"
             echo "--- Initializing & Planning: $dir ---"
             terraform -chdir="$_BASE_DIR/$dir" init -input=false
