@@ -41,6 +41,7 @@ steps:
             terraform -chdir="$_BASE_DIR/$dir" apply -auto-approve -input=false -var-file="../../../terraform.tfvars"
           fi
         done
+        
 
 options:
   logging: CLOUD_LOGGING_ONLY
