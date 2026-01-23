@@ -22,6 +22,7 @@ resource "google_compute_backend_service" "nginx_backend" {
 resource "google_storage_bucket" "error_bucket" {
   name     = "error-page-bucket"
   location = var.region
+  uniform_bucket_level_access = true
 }
 
 resource "google_compute_backend_bucket" "error_backend" {
