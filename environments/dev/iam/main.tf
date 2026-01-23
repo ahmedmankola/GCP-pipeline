@@ -27,6 +27,6 @@ resource "google_project_iam_custom_role" "basic_operation_role" {
 # 2. Assign the Role to a User (Optional - replace with your user email)
 resource "google_project_iam_member" "assign_role" {
   project = var.project_id
-  role    = google_project_iam_custom_role.vm_operator.id
+  role    = google_project_iam_custom_role.basic_operation_role.id
   member  = "user:ahmed.mankola@gmail.com" 
 }
