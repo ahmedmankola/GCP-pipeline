@@ -1,10 +1,10 @@
 # Instance Template
 resource "google_compute_instance_template" "nginx_template" {
   name         = "nginx-template"
-  machine_type = "e2-medium"
+  machine_type = "e2-small"
 
   disk {
-    source_image = "ubuntu-os-cloud/ubuntu-2204-lts"
+    source_image = "projects/gdo-skc-hs-cairo/global/images/apache-image"
     auto_delete  = true
     boot         = true
   }
@@ -13,15 +13,6 @@ resource "google_compute_instance_template" "nginx_template" {
     subnetwork = data.google_compute_subnetwork.VM-private_subnet.id
     # No public IP for these backends; they will be behind the LB
   }
-
-  metadata_startup_script = <<-EOT
-    #!/bin/bash
-    apt-get update
-    apt-get install -y nginx
-    systemctl enable nginx
-    systemctl start nginx
-    echo "Hello from $(hostname)" > /var/www/html/index.html
-  EOT
 
   tags = ["allow-health-check"]
 }
