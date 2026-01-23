@@ -10,7 +10,7 @@ resource "google_sql_database_instance" "mysql_private" {
 
     ip_configuration {
       ipv4_enabled    = false                                # Requirement 1: No Public IP
-      private_network = data.google_compute_network.vpc.id   # Requirement 2: Private VPC only
+      private_network = data.google_compute_network.sql-vpc.id   # Requirement 2: Private VPC only
     }
 
     backup_configuration {
