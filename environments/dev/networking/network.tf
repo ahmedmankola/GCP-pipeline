@@ -25,3 +25,21 @@ resource "google_compute_subnetwork" "subnet_B" {
   
   private_ip_google_access = true
 }
+
+# 1. Allocate a private IP range for Google Managed Services
+resource "google_compute_global_address" "private_ip_alloc" {
+  name          = "google-managed-services-range"
+  purpose       = "VPC_PEERING"
+  address_type  = "INTERNAL"
+  prefix_length = 24
+  address       = "10.0.2.0"
+  network       = data.google_compute_network.vpc.id # Use your VPC data block
+}
+
+# 2. Create the Private Service Connection (Peering)
+resource "google_service_networking_connection" "private_vpc_connection" {
+  network                 = data.google_compute_network.vpc.id
+  service                 = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [google_compute_global_address.private_ip_alloc.name]
+}
+
