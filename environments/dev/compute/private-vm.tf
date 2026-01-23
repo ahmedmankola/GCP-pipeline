@@ -10,7 +10,7 @@ resource "google_compute_instance" "private_vm" {
   }
 
   network_interface {
-    subnetwork = google_compute_subnetwork.private_subnet.id
+    subnetwork = data.google_compute_subnetwork.VM-private_subnet.id
     # No access_config block = No Public IP
   }
 
@@ -19,7 +19,7 @@ resource "google_compute_instance" "private_vm" {
     #!/bin/bash
     INTERNAL_IP=$(hostname -I | awk '{print $1}')
     echo "My Internal IP is: $INTERNAL_IP" > ip_info.txt
-    gsutil cp ip_info.txt gs://${google_storage_bucket.ip_log_bucket.name}/vm_internal_ip.txt
+    gsutil cp ip_info.txt gs://${data.google_storage_bucket.ip_log_bucket.name}/vm_internal_ip.txt
   EOT
 
   service_account {
