@@ -32,7 +32,6 @@ resource "google_compute_global_address" "private_ip_alloc" {
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   prefix_length = 24
-  address       = "10.0.2.0"
   network       = data.google_compute_network.vpc.id # Use your VPC data block
 }
 
