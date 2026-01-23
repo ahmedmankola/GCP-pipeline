@@ -6,7 +6,8 @@ resource "random_id" "bucket_suffix" {
 
 resource "google_storage_bucket" "ip_log_bucket" {
   name          = "vm-internal-ip-log-${random_id.bucket_suffix.hex}"
-  location      = "EU"
+  location      = var.region
+  project       = var.project-id
   force_destroy = true
 }
 
