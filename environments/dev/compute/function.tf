@@ -50,5 +50,5 @@ esource "google_project_iam_member" "gcs_pubsub_publishing" {
   project = var.project_id
   role    = "roles/pubsub.publisher"
   # The email format is always service-PROJECT_NUMBER@gs-project-accounts.iam.gserviceaccount.com
-  member  = "serviceAccount:service-${data.google_project.project.number}@gs-project-accounts.iam.gserviceaccount.com"
+  member  = "serviceAccount:service-${var.project_no}@gs-project-accounts.iam.gserviceaccount.com"
 }
