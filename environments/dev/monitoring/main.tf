@@ -1,6 +1,6 @@
 resource "google_monitoring_alert_policy" "downtime_alert" {
   display_name = "Load Balancer Downtime Alert (>5m)"
-  project      = var.project
+  project      = var.project_id
   combiner     = "OR"
   conditions {
     display_name = "Downtime Duration Condition"
