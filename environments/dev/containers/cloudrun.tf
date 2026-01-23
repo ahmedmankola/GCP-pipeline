@@ -1,0 +1,21 @@
+resource "google_cloud_run_v2_service" "cloudrun_service" {
+  name     = "cloudrun-service"
+  location = "europe-west1"
+  template {
+    containers {
+      image = "gcr.io/cloudrun/container/hello" 
+      env {
+        name = "DB_PASSWORD"
+        value_source {
+          secret_key_ref {
+            secret  = google_secret_manager_secret.app_secret.secret_id
+            version = "latest"
+          }
+        }
+      }
+    }
+  }
+  
+  # Ensure secret version exists before service tries to pull it
+  depends_on = [google_secret_manager_secret_version.v1]
+}
