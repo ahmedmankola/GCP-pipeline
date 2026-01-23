@@ -1,3 +1,17 @@
+#archive the python script
+data "archive_file" "function_source" {
+  type        = "zip"
+  source_dir  = "code" # Points to your 'code' directory in GitHub
+  output_path = "function-source.zip"
+}
+
+# 2. Upload the zip to your source bucket
+resource "google_storage_bucket_object" "function_zip" {
+  name   = "function-source-${data.archive_file.function_source.output_md5}.zip"
+  bucket = google_storage_bucket.source_code_bucket.name
+  source = data.archive_file.function_source.output_path
+}
+
 # 1. Cloud Function 2nd Gen
 resource "google_cloudfunctions2_function" "metadata_logger" {
   name        = "storage-metadata-logger"
