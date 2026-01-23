@@ -9,7 +9,7 @@ steps:
         export TF_LOG=INFO
         base_dir="environments/dev/"
        
-        for dir in iam networking storage compute; do
+        for dir in iam networking storage; do
           echo "--- Processing: $dir ---"
           echo "--- Initializing & Planning: $dir ---"
           terraform -chdir="$base_dir$dir" init -input=false
@@ -36,7 +36,7 @@ steps:
         fi
 
         base_dir="environments/dev/"
-        for dir in iam networking storage compute; do
+        for dir in iam networking storage; do
           echo "--- Applying Changes: $dir ---"
           terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="../../../terraform.tfvars"
         done
