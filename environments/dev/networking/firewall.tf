@@ -27,7 +27,7 @@ resource "google_compute_firewall" "allow_iap" {
 # Allow health checks and LB traffic
 resource "google_compute_firewall" "allow_lb_hb" {
   name    = "allow-lb-to-backends_hb"
-  network = data.google_compute_network.application_vpc.id
+  network = google_compute_network.application_vpc.name
 
   allow {
     protocol = "tcp"
