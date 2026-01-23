@@ -1,10 +1,11 @@
 resource "google_cloud_run_v2_service" "cloudrun_service" {
   name     = "cloudrun-service"
   location = "europe-west1"
+  deletion_protection = false
   template {
    service_account = google_service_account.cloud_run_sa.email
     containers {
-      image = "gcr.io/cloudrun/container/hello" 
+      image = "gcr.io/cloudrun/hello" 
       env {
         name = "DB_PASSWORD"
         value_source {
