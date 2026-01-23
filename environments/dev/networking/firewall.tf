@@ -22,3 +22,19 @@ resource "google_compute_firewall" "allow_iap" {
   }
   source_ranges =  [ "35.235.240.0/20" ]
 }
+
+
+# Allow health checks and LB traffic
+resource "google_compute_firewall" "allow_lb_hb" {
+  name    = "allow-lb-to-backends_hb"
+  network = data.google_compute_network.vpc.id
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
+  }
+
+  # Google LB IP ranges
+  source_ranges = ["130.211.0.0/22", "35.191.0.0/16"]
+  target_tags   = ["allow-health-check"]
+}
