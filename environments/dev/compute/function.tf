@@ -46,7 +46,7 @@ resource "google_cloudfunctions2_function" "metadata_logger" {
 
 
 # add pub sub permission for sa 
-esource "google_project_iam_member" "gcs_pubsub_publishing" {
+resource "google_project_iam_member" "gcs_pubsub_publishing" {
   project = var.project_id
   role    = "roles/pubsub.publisher"
   # The email format is always service-PROJECT_NUMBER@gs-project-accounts.iam.gserviceaccount.com
