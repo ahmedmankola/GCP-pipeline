@@ -1,6 +1,6 @@
 # 1. Reference the existing Subnet
 data "google_compute_subnetwork" "VM-private_subnet" {
-  name    = "your-existing-subnet-name"
+  name    = "subnet-europe-west1"
   region  = var.region
   project = var.project_id
 }
