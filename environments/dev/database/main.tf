@@ -15,7 +15,6 @@ resource "google_sql_database_instance" "mysql_private" {
 
     backup_configuration {
       enabled            = true # Requirement 3: Automated Backups
-      start_time         = "03:00"
       backup_retention_settings {
         retained_backups = 7    
         retention_unit   = "COUNT"
