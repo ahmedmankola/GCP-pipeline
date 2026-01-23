@@ -14,7 +14,7 @@ resource "google_compute_instance_template" "nginx_template" {
     # No public IP for these backends; they will be behind the LB
   }
 
-  tags = ["allow-health-check"]
+  tags = ["allow-health-check","db-client"]
 }
 
 # Regional Managed Instance Group (Across 2 Zones)
