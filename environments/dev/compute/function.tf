@@ -25,7 +25,7 @@ resource "google_cloudfunctions2_function" "metadata_logger" {
     trigger_region = "europe-west1" # Must match bucket location
     event_filters {
       attribute = "bucket"
-      value     = google_storage_bucket.trigger_bucket.name
+      value     = data.google_storage_bucket.ip_log_bucket.name
     }
   }
 }
