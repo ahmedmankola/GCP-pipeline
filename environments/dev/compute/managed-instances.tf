@@ -10,7 +10,7 @@ resource "google_compute_instance_template" "nginx_template" {
   }
 
   network_interface {
-    subnetwork = data.google_compute_subnetwork.VM-private_subnet
+    subnetwork = data.google_compute_subnetwork.VM-private_subnet.id
     # No public IP for these backends; they will be behind the LB
   }
 
