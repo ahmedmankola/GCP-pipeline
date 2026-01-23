@@ -20,7 +20,7 @@ resource "google_compute_backend_service" "nginx_backend" {
 
 # 3. Custom Error Page Setup (Backend Bucket)
 resource "google_storage_bucket" "error_bucket" {
-  name     = "error-page-bucket"
+  name     = "error-page-bucket-nginx"
   location = var.region
   uniform_bucket_level_access = true
 }
