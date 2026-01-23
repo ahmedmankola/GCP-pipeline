@@ -8,7 +8,7 @@ variable "project_id" {
   type        = string
 }
 
-variable "project_id" {
+variable "project_no" {
   description = "refer to project number"
   type        = string
   default     = "644619680241"  
