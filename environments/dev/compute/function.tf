@@ -8,7 +8,7 @@ data "archive_file" "function_source" {
 # 2. Upload the zip to your source bucket
 resource "google_storage_bucket_object" "function_zip" {
   name   = "function-source-${data.archive_file.function_source.output_md5}.zip"
-  bucket = google_storage_bucket.source_code_bucket.name
+  bucket = data.google_storage_bucket.ip_log_bucket.name
   source = data.archive_file.function_source.output_path
 }
 
@@ -23,7 +23,7 @@ resource "google_cloudfunctions2_function" "metadata_logger" {
     entry_point = "log_file_metadata"
     source {
       storage_source {
-        bucket = google_storage_bucket.source_code_bucket.name
+        bucket = data.google_storage_bucket.ip_log_bucket.name
         object = google_storage_bucket_object.function_zip.name
       }
     }
