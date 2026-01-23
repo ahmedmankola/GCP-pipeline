@@ -7,5 +7,8 @@ data "google_compute_subnetwork" "VM-private_subnet" {
 
 # 2. Reference the existing Storage Bucket
 data "google_storage_bucket" "ip_log_bucket" {
-  name = "your-existing-bucket-name"
+  name    = "vm-internal-ip-log"
+  project = var.project_id
 }
+
+
