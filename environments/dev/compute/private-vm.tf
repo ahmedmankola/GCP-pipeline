@@ -1,7 +1,7 @@
 resource "google_compute_instance" "private_vm" {
   name         = "private-ubuntu-vm"
   machine_type = "e2-medium"
-  zone         = "us-central1-a"
+  zone         = "europe-west1-b"
 
   boot_disk {
     initialize_params {
