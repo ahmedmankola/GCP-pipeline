@@ -10,3 +10,9 @@ data "google_compute_network" "gke-vpc" {
   name    = "application-vpc"
   project = var.project_id
 }
+
+
+data "google_service_account" "cloud_build_sa" {
+    account_id = "gke-deployer-sa"
+
+}
