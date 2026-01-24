@@ -40,6 +40,7 @@ resource "google_cloudfunctions2_function" "metadata_logger" {
     event_filters {
       attribute = "bucket"
       value     = data.google_storage_bucket.ip_log_bucket.name
+      retry_policy   = "RETRY_POLICY_DO_NOT_RETRY"
     }
   }
 }
