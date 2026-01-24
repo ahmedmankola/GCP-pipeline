@@ -8,7 +8,7 @@ resource "google_monitoring_uptime_check_config" "lb_reachability" {
     labels = {
       project_id = var.project_id
       # This pulls the IP address from the data block
-      host       = data.google_compute_global_forwarding_rule.loadbalancer-fr.address
+      host       = data.google_compute_global_forwarding_rule.loadbalancer-fr.ip_address
     }
   }
 
