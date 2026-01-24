@@ -41,8 +41,8 @@ steps:
           terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="../../../terraform.tfvars"
         done
         for dir in containers GKE  compute database monitoring storage iam networking; do
-          echo "--- Applying Changes: $dir ---"
-          terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="../../../terraform.tfvars"
+          echo "--- deleting Changes: $dir ---"
+          terraform -chdir="$base_dir$dir" destroy -auto-approve -input=false -var-file="../../../terraform.tfvars"        
         done
         
 options:
