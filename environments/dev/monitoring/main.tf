@@ -12,7 +12,7 @@ resource "google_monitoring_alert_policy" "uptime_alert" {
         AND resource.type="uptime_url"
       EOT
 
-      duration   = "60s" # Time to wait before firing the alert
+      duration   = "300s" # Time to wait before firing the alert
       comparison = "COMPARISON_GT"
       threshold_value = 1 # 1 means the check passed, anything else is a failure
       
