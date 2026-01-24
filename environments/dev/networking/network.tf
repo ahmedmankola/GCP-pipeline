@@ -30,7 +30,7 @@ resource "google_compute_subnetwork" "gke-private_subnet" {
   name          = "gke-subnet-europe-west1"
   ip_cidr_range = "10.0.3.0/24" # Your main node range
   region        = "europe-west1"
-  network       = data.google_compute_network.gke-vpc.id
+  network       = google_compute_network.application_vpc.id
 
   # ADD THESE BLOCKS
   secondary_ip_range {
