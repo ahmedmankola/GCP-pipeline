@@ -1,0 +1,37 @@
+steps:
+  # 1. Initialize Terraform
+  - name: 'hashicorp/terraform:1.6' # Use a stable version
+    id: 'Terraform Init'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        cd terraform/
+        terraform init
+
+  # 2. Generate an Execution Plan
+  - name: 'hashicorp/terraform:1.6'
+    id: 'Terraform Plan'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        cd terraform/
+        terraform plan -out=tfplan
+
+  # 3. Apply the Changes (Only on main branch)
+  - name: 'hashicorp/terraform:1.6'
+    id: 'Terraform Apply'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        if [ "$BRANCH_NAME" = "main" ]; then
+          cd terraform/
+          terraform apply -auto-approve tfplan
+        else
+          echo "Skipping apply on non-main branch"
+        fi
+
+options:
+  logging: CLOUD_LOGGING_ONLY
