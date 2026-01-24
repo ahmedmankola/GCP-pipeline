@@ -14,8 +14,8 @@ steps:
       - '-c'
       - |
         gcloud container clusters get-credentials my-gke-cluster --region europe-west1
-        sed -i "s|IMAGE_PLACEHOLDER|europe-west1-docker.pkg.dev/$PROJECT_ID/my-web-app-repo/my-app:$SHORT_SHA|g" k8s/deployment.yaml
-        kubectl apply -f k8s/
+        sed -i "s|IMAGE_PLACEHOLDER|europe-west1-docker.pkg.dev/$PROJECT_ID/my-web-app-repo/my-app:$SHORT_SHA|g" cluster/deployment.yaml
+        kubectl apply -f cluster/
 serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/gke-deployer-sa@$PROJECT_ID.iam.gserviceaccount.com'
 options:
   # Use the custom least-privilege service account
