@@ -5,7 +5,7 @@ resource "google_container_cluster" "primary" {
   # We delete the default pool to use a separately managed one
   remove_default_node_pool = true
   initial_node_count       = 1
-  network    = data.google_compute_network.gke-private_subnet.id
+  network    = data.google_compute_network.gke-vpc.id
   subnetwork = data.google_compute_subnetwork.gke-private_subnet.id
 }
 
