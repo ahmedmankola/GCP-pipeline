@@ -13,6 +13,6 @@ data "google_compute_network" "gke-vpc" {
 
 
 data "google_service_account" "cloud_build_sa" {
-    account_id = "gke-deployer-sa"
+    account_id = "gke-build-sa"
 
 }
