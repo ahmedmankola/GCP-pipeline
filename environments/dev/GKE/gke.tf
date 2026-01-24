@@ -2,6 +2,8 @@
 resource "google_container_cluster" "primary" {
   name     = "my-gke-cluster"
   location = "europe-west1"
+  # SET THIS TO FALSE TO ENABLE DELETE
+  deletion_protection = false
   # We delete the default pool to use a separately managed one
   remove_default_node_pool = true
   initial_node_count       = 1
