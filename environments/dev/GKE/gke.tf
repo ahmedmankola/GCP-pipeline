@@ -25,8 +25,11 @@ resource "google_container_node_pool" "primary_nodes" {
   name       = "main-pool"
   location   = "europe-west1"
   cluster    = google_container_cluster.primary.name
-  min_node_count = 1
-  max_node_count = 1 #
+# Use autoscaling to set the limit
+  autoscaling {
+    min_node_count = 1
+    max_node_count = 1 # Total 3 nodes (1 per zone in europe-west1-b, c, d)
+  }
   node_config {
     preemptible  = true # Saves money for testing
     machine_type = "e2-medium"
