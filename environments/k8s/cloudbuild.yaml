@@ -1,7 +1,7 @@
 steps:
   # Step 1: Build the Docker Image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/my-app:$SHORT_SHA', './app']
+    args: ['build', '-t', 'europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/my-app:$SHORT_SHA', '-f', 'environments/k8s/app/Dockerfile', 'environments/k8s/app']
 
   # Step 2: Push to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
