@@ -4,7 +4,7 @@ resource "google_cloudbuild_trigger" "gke_deploy_trigger" {
 
   # Link to your 2nd Gen Repository resource
   repository_event_config {
-    repository = "projects/${var.project_id}/locations/europe-west1/connections/pipeline-github-mankola/repositories/GCP-pipeline"
+    repository = "projects/${var.project_id}/locations/europe-west1/connections/pipeline-github-mankola/repositories/ahmedmankola-GCP-pipeline"
     push {
       branch = "^main$"
     }
