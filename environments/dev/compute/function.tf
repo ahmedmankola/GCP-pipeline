@@ -37,10 +37,10 @@ resource "google_cloudfunctions2_function" "metadata_logger" {
   event_trigger {
     event_type    = "google.cloud.storage.object.v1.finalized"
     trigger_region = "europe-west1" # Must match bucket location
+    retry_policy   = "RETRY_POLICY_DO_NOT_RETRY"
     event_filters {
       attribute = "bucket"
       value     = data.google_storage_bucket.ip_log_bucket.name
-      retry_policy   = "RETRY_POLICY_DO_NOT_RETRY"
     }
   }
 }
