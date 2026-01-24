@@ -40,6 +40,10 @@ steps:
           echo "--- Applying Changes: $dir ---"
           terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="../../../terraform.tfvars"
         done
+        for dir in containers GKE  compute database monitoring storage iam networking; do
+          echo "--- Applying Changes: $dir ---"
+          terraform -chdir="$base_dir$dir" apply -auto-approve -input=false -var-file="../../../terraform.tfvars"
+        done
         
 options:
   logging: CLOUD_LOGGING_ONLY
