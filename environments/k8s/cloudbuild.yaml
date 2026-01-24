@@ -1,0 +1,23 @@
+steps:
+  # Step 1: Build the Docker Image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/my-app:$SHORT_SHA', './app']
+
+  # Step 2: Push to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/my-app:$SHORT_SHA']
+
+  # Step 3: Deploy to GKE
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud container clusters get-credentials my-gke-cluster --region europe-west1
+        sed -i "s|IMAGE_PLACEHOLDER|europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/my-app:$SHORT_SHA|g" k8s/deployment.yaml
+        kubectl apply -f k8s/
+
+options:
+  # Use the custom least-privilege service account
+  serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/gke-deployer-sa@$PROJECT_ID.iam.gserviceaccount.com'
+  logging: CLOUD_LOGGING_ONLY
