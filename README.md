@@ -14,9 +14,13 @@ This repository manages the lifecycle of the GCP environment. To ensure a stable
 
 To avoid "Resource Not Found" errors, enable and apply the following folders in this specific order:
 Phase	Folder	Function
+
 1	iam/	Creates Service Accounts, Custom Roles, and Workload Identity Pools. This is the foundation for security.
+
 2	network/	Provisions the VPC, Subnets, Cloud NAT (for private GKE), and Firewall Rules.
+
 3	storage/	Creates GCS Buckets for state files, static assets, and backups.
+
 4	database/	Configures Cloud SQL (PostgreSQL/MySQL) and Redis instances.
 5	gke/	Deploys the Kubernetes Engine cluster, including Node Pools and Autoscalers.
 6	compute/	Manages standalone VM instances, Managed Instance Groups (MIGs), and Load Balancers.
