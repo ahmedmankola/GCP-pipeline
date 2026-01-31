@@ -22,7 +22,11 @@ Phase	Folder	Function
 3	storage/	Creates GCS Buckets for state files, static assets, and backups.
 
 4	database/	Configures Cloud SQL (PostgreSQL/MySQL) and Redis instances.
+
 5	gke/	Deploys the Kubernetes Engine cluster, including Node Pools and Autoscalers.
+
 6	compute/	Manages standalone VM instances, Managed Instance Groups (MIGs), and Load Balancers.
+
 7	container/	Sets up Artifact Registry or Container Registry for your Docker images.
+
 8	monitoring/	(Final Phase) Configures Uptime Checks, MQL Alerting Policies, and Dashboards.
