@@ -27,7 +27,6 @@ Compute	roles/compute.instanceAdmin.v1	To manage VM instances and Managed Instan
 
 Monitoring	roles/monitoring.admin	To create Uptime Checks, Alerting Policies, and Dashboards.
 
-================================================================================================================
 📂 Folder Structure & Deployment Phases
 =======================================
 To avoid "Resource Not Found" errors, enable and apply the following folders in this specific order:
