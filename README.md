@@ -8,7 +8,23 @@ This repository manages the lifecycle of the GCP environment. To ensure a stable
 
     Service Account Permissions: Grant the Cloud Build Service Account the following roles at the project level:
 
-        roles/owner (or Editor + Project IAM Admin) to allow resource creation and policy binding.
+     Service Account Permissions (Least Privilege)
+
+To ensure the Cloud Build Service Account ([project-number]@cloudbuild.gserviceaccount.com) can manage the infrastructure without having excessive permissions, assign the following Minimum Roles:
+Category	Role Name	Purpose
+IAM	roles/resourcemanager.projectIamAdmin	To create Service Accounts and assign IAM bindings.
+
+Network	roles/compute.networkAdmin	To create VPCs, Subnets, Firewalls, and Cloud NAT.
+
+Storage	roles/storage.admin	To manage GCS buckets for state files and data.
+
+Database	roles/cloudsql.admin	To provision and manage Cloud SQL instances.
+
+GKE	roles/container.clusterAdmin	To create and manage Kubernetes clusters and node pools.
+
+Compute	roles/compute.instanceAdmin.v1	To manage VM instances and Managed Instance Groups.
+
+Monitoring	roles/monitoring.admin	To create Uptime Checks, Alerting Policies, and Dashboards.
 
 📂 Folder Structure & Deployment Phases
 
