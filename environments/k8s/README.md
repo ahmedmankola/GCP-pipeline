@@ -11,7 +11,7 @@ The Cloud Build trigger for this directory is automatically provisioned by the t
     Action: When a PR is merged to main, the pipeline validates the YAML and deploys to GKE.
 
 📂 Component Details
-
+=======================
     deployments/: Defines the desired state for your application (number of replicas, container images, and resource limits).
 
     services/: Configures Internal and External Load Balancers to expose your app.
